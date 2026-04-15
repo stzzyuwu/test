@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Table Reservation – Backyard Food & Drinks</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+
+  <!-- ── Navbar ── -->
+  <nav class="navbar">
+    <a class="navbar-brand" href="#">
+      <img src="../images/byardslogo.png" alt="Backyards logo" class="navbar-logo"/>
+      <div class="navbar-text">
+        <div class="brand-name">BACKYARD</div>
+        <div class="brand-sub">Food &amp; Drinks Resto</div>
+      </div>
+    </a>
+    <div class="navbar-links">
+      <a href="menu.html" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+        </svg>
+        <span>Menu</span>
+      </a>
+      <a href="table.html" class="nav-link active">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        <span>Table Reservation</span>
+      </a>
+      <a href="#" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span>Order</span>
+      </a>
+    </div>
+  </nav>
+
+  <main class="reservation-page">
+
+    <!-- ── Step 1: Date & Guests ── -->
+    <div class="step-card active" id="step1">
+      <h1 class="step-title">Reserve a Table</h1>
+      <p class="step-sub">Select your preferred date and number of guests</p>
+
+      <div class="field">
+        <label for="res-date">Date</label>
+        <div class="field-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <input type="date" id="res-date" placeholder="Select date" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="res-guests">Number of Guests</label>
+        <div class="select-wrap">
+          <select id="res-guests">
+            <option value="" disabled selected>Number of guests</option>
+            <option value="1">1 Guest</option>
+            <option value="2">2 Guests</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4 Guests</option>
+            <option value="5">5 Guests</option>
+            <option value="6">6 Guests</option>
+            <option value="7">7 Guests</option>
+            <option value="8">8 Guests</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" style="margin-top:8px" onclick="goToStep2()">Check Availability</button>
+    </div>
+
+    <!-- ── Step 2: Time Slots ── -->
+    <div class="step-card time-step-card" id="step2">
+      <h1 class="step-title">Select Time</h1>
+      <p class="step-sub">Select your preferred available time</p>
+
+      <div class="slots-header">
+        <span class="slots-header-title">Today's Schedule</span>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot avail"></div> Available</div>
+          <div class="legend-item"><div class="legend-dot unavail"></div> Unavailable</div>
+        </div>
+      </div>
+
+      <div class="slots-grid" id="slots-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- ── Step 3: Fill In Details ── -->
+    <div class="step-card" id="step3">
+      <h1 class="step-title">Fill In Your Details</h1>
+      <p class="step-sub">Complete your reservation</p>
+
+      <div class="summary-box">
+        <div class="summary-row">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <span id="s3-date">—</span>
+        </div>
+        <div class="summary-row">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <span id="s3-time">—</span>
+        </div>
+        <div class="summary-row">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <span id="s3-guests">—</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="res-name">Full Name</label>
+        <input type="text" id="res-name" placeholder="Enter your full name" />
+      </div>
+      <div class="field">
+        <label for="res-email">Email</label>
+        <input type="email" id="res-email" placeholder="Enter your email" />
+      </div>
+      <div class="field">
+        <label for="res-phone">Phone Number</label>
+        <div class="phone-wrap">
+          <span class="phone-prefix">+63</span>
+          <input type="tel" id="res-phone" placeholder="9XX XXX XXXX" maxlength="10" />
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="goToStep('step2')">Back</button>
+        <button class="btn btn-primary" onclick="goToStep4()">Confirm Reservation</button>
+      </div>
+    </div>
+
+    <!-- ── Step 4: Confirmation ── -->
+    <div class="step-card confirm-step-card" id="step4">
+      <div class="checkmark-circle">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <h1 class="confirm-title">Reservation Confirmed!</h1>
+      <p class="confirm-sub" id="s4-email-msg">A confirmation has been sent to your email.</p>
+
+      <div class="confirm-table">
+        <div class="confirm-table-row">
+          <span class="ctkey">Name</span>
+          <span class="ctval" id="s4-name">—</span>
+        </div>
+        <div class="confirm-table-row">
+          <span class="ctkey">Date</span>
+          <span class="ctval" id="s4-date">—</span>
+        </div>
+        <div class="confirm-table-row">
+          <span class="ctkey">Time</span>
+          <span class="ctval" id="s4-time">—</span>
+        </div>
+        <div class="confirm-table-row">
+          <span class="ctkey">Number of Guests</span>
+          <span class="ctval" id="s4-guests">—</span>
+        </div>
+      </div>
+
+      <div class="confirm-btn-row">
+        <button class="btn btn-outline" onclick="resetFlow()">Make Another Reservation</button>
+        <button class="btn btn-primary" onclick="window.location.href='menu.html'">Return</button>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // ── State ──
+    const state = { date: '', guests: '', time: '' };
+
+    const TIME_SLOTS = [
+      { t: '17:00', avail: true },
+      { t: '17:30', avail: true },
+      { t: '18:00', avail: true },
+      { t: '18:30', avail: false },
+      { t: '19:00', avail: false },
+      { t: '19:30', avail: true },
+      { t: '20:00', avail: true },
+      { t: '20:30', avail: false },
+      { t: '21:00', avail: false },
+      { t: '21:30', avail: true },
+      { t: '22:00', avail: false },
+    ];
+
+    function showStep(id) {
+      document.querySelectorAll('.step-card').forEach(c => c.classList.remove('active'));
+      const el = document.getElementById(id);
+      el.classList.add('active');
+    }
+
+    function goToStep(id) { showStep(id); }
+
+    function formatDateDisplay(dateStr) {
+      if (!dateStr) return '—';
+      const d = new Date(dateStr + 'T00:00:00');
+      return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    }
+
+    function goToStep2() {
+      const dateVal   = document.getElementById('res-date').value;
+      const guestsVal = document.getElementById('res-guests').value;
+      if (!dateVal)   { alert('Please select a date.'); return; }
+      if (!guestsVal) { alert('Please select number of guests.'); return; }
+      state.date   = dateVal;
+      state.guests = guestsVal;
+
+      // Render slots
+      const grid = document.getElementById('slots-grid');
+      grid.innerHTML = '';
+      TIME_SLOTS.forEach(slot => {
+        const btn = document.createElement('button');
+        btn.className = 'slot-btn ' + (slot.avail ? 'avail' : 'unavail');
+        btn.disabled  = !slot.avail;
+        btn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          ${slot.t}`;
+        if (slot.avail) {
+          btn.onclick = () => selectSlot(slot.t, btn);
+        }
+        grid.appendChild(btn);
+      });
+
+      showStep('step2');
+    }
+
+    function selectSlot(time, btn) {
+      document.querySelectorAll('.slot-btn.avail').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      state.time = time;
+      // Auto-advance after brief delay
+      setTimeout(() => {
+        populateStep3();
+        showStep('step3');
+      }, 260);
+    }
+
+    function populateStep3() {
+      document.getElementById('s3-date').textContent   = formatDateDisplay(state.date);
+      document.getElementById('s3-time').textContent   = state.time;
+      document.getElementById('s3-guests').textContent = state.guests + ' Guest' + (parseInt(state.guests) > 1 ? 's' : '');
+    }
+
+    function goToStep4() {
+      const name  = document.getElementById('res-name').value.trim();
+      const email = document.getElementById('res-email').value.trim();
+      const phone = document.getElementById('res-phone').value.trim();
+      if (!name)  { alert('Please enter your full name.'); return; }
+      if (!email) { alert('Please enter your email.'); return; }
+      if (!phone) { alert('Please enter your phone number.'); return; }
+
+      document.getElementById('s4-name').textContent   = name;
+      document.getElementById('s4-date').textContent   = formatDateDisplay(state.date);
+      document.getElementById('s4-time').textContent   = state.time;
+      document.getElementById('s4-guests').textContent = state.guests + ' Guest' + (parseInt(state.guests) > 1 ? 's' : '');
+      document.getElementById('s4-email-msg').textContent = `A confirmation email has been sent to ${email}`;
+
+      showStep('step4');
+    }
+
+    function resetFlow() {
+      document.getElementById('res-date').value   = '';
+      document.getElementById('res-guests').value = '';
+      document.getElementById('res-name').value   = '';
+      document.getElementById('res-email').value  = '';
+      document.getElementById('res-phone').value  = '';
+      state.date = ''; state.guests = ''; state.time = '';
+      showStep('step1');
+    }
+  </script>
+</body>
+</html>
